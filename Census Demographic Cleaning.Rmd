@@ -137,5 +137,20 @@ p2018<-p2018[-c(1),]
 
 ```
 
-Create a column with the total percent below the poverty line. 
+Create a column with the total percent below the poverty line and delete counts of people below poverty line. 
+```{r}
+
+```
+
+
+Merge into tidy form by year
+```{r}
+
+```
+
+
+Subset by master list
+```{r}
+
+```
 
