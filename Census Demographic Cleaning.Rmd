@@ -14,11 +14,7 @@ library(readtext)
 setwd("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads")
 ```
 
-
-```{r}
-filelist <- list.files(pattern = "cen*",full.names = T) %>% map_df(~read_csv(., col_types = cols(.default = "c")))
-```
-
+Read in all the individual files.
 ```{r}
 csd2000 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2000csd.csv")
 csd2009 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2009csd.csv")
@@ -47,29 +43,99 @@ p2018 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics
 
 Subset the data
 ```{r}
-csd2000<-csd2000%>%select(c(9,14,23,24,55,71,74,78,79,83,88,93))
-p2000<-p2000%>%select(c(9,14,23,24,55,71,74,78,79,83,88,93))
-csd2009<-csd2009%>%select(c(1,54,63,64,95,111,114,118,119,123,128,133))
-p2009<-p2009%>%select(c(1,54,63,64,95,111,114,118,119,123,128,133))
-csd2010<-csd2010%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
-p2010<-p2010%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
-csd2011<-csd2011%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
-p2011<-p2011%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
-csd2012<-csd2012%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
-p2012<-p2012%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
-csd2013<-csd2013%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
-p2013<-p2013%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
-csd2014<-csd2014%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
-p2014<-p2014%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
-csd2015<-csd2015%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
-p2015<-p2015%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
-csd2016<-csd2016%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
-p2016<-p2016%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
-csd2017<-csd2017%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
-p2017<-p2017%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
-csd2018<-csd2018%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
-p2018<-p2018%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
+csd2000<-csd2000%>%select(c(9,14,23,24,55,71,74,78,79,81,86,91))
+p2000<-p2000%>%select(c(9,14,23,24,55,71,74,78,79,81,86,91))
+csd2009<-csd2009%>%select(c(1,54,63,64,95,111,114,118,119,121,126,131))
+p2009<-p2009%>%select(c(1,54,63,64,95,111,114,118,119,121,126,131))
+csd2010<-csd2010%>%select(c(1,56,65,66,97,113,116,120,121,123,128,133))
+p2010<-p2010%>%select(c(1,56,65,66,97,113,116,120,121,123,128,133))
+csd2011<-csd2011%>%select(c(1,56,65,66,97,113,116,120,121,123,128,133))
+p2011<-p2011%>%select(c(1,56,65,66,97,113,116,120,121,123,128,133))
+csd2012<-csd2012%>%select(c(1,56,65,66,97,113,116,120,121,123,128,133))
+p2012<-p2012%>%select(c(1,56,65,66,97,113,116,120,121,123,128,133))
+csd2013<-csd2013%>%select(c(1,56,65,66,97,113,116,120,121,123,128,133))
+p2013<-p2013%>%select(c(1,56,65,66,97,113,116,120,121,123,128,133))
+csd2014<-csd2014%>%select(c(1,56,65,66,97,113,116,120,121,123,128,133))
+p2014<-p2014%>%select(c(1,56,65,66,97,113,116,120,121,123,128,133))
+csd2015<-csd2015%>%select(c(1,56,65,66,97,113,116,120,121,123,128,133))
+p2015<-p2015%>%select(c(1,56,65,66,97,113,116,120,121,123,128,133))
+csd2016<-csd2016%>%select(c(1,56,65,66,97,113,116,120,121,123,128,133))
+p2016<-p2016%>%select(c(1,56,65,66,97,113,116,120,121,123,128,133))
+csd2017<-csd2017%>%select(c(1,56,65,66,97,113,116,120,121,123,128,133))
+p2017<-p2017%>%select(c(1,56,65,66,97,113,116,120,121,123,128,133))
+csd2018<-csd2018%>%select(c(1,56,65,66,97,113,116,120,121,123,128,133))
+p2018<-p2018%>%select(c(1,56,65,66,97,113,116,120,121,123,128,133))
 ```
 
+Change the column names and remove the first row.
+```{r}
+colnames(csd2000)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+csd2000<-csd2000[-c(1),]
 
+colnames(csd2009)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+csd2009<-csd2009[-c(1),]
+
+colnames(csd2010)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+csd2010<-csd2010[-c(1),]
+
+colnames(csd2011)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+csd2011<-csd2011[-c(1),]
+
+colnames(csd2012)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+csd2012<-csd2012[-c(1),]
+
+colnames(csd2013)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+csd2013<-csd2013[-c(1),]
+
+colnames(csd2014)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+csd2014<-csd2014[-c(1),]
+
+colnames(csd2015)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+csd2015<-csd2015[-c(1),]
+
+colnames(csd2016)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+csd2016<-csd2016[-c(1),]
+
+colnames(csd2017)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+csd2017<-csd2017[-c(1),]
+
+colnames(csd2018)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+csd2018<-csd2018[-c(1),]
+
+colnames(p2000)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+p2000<-p2000[-c(1),]
+
+colnames(p2009)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+p2009<-p2009[-c(1),]
+
+colnames(p2010)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+p2010<-p2010[-c(1),]
+
+colnames(p2011)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+p2011<-p2011[-c(1),]
+
+colnames(p2012)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+p2012<-p2012[-c(1),]
+
+colnames(p2013)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+p2013<-p2013[-c(1),]
+
+colnames(p2014)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+p2014<-p2014[-c(1),]
+
+colnames(p2015)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+p2015<-p2015[-c(1),]
+
+colnames(p2016)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+p2016<-p2016[-c(1),]
+
+colnames(p2017)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+p2017<-p2017[-c(1),]
+
+colnames(p2018)<-c("FIPS","TOT_POP","PCT_White","PCT_Black","PCT_Hispanic","PCT_25Plus_LessThanDiploma","PCT_25Plus_Bachelors","Median_Income","Median_Year_Built","Below18_Poverty","18_64_Poverty","65Plus_Poverty")
+p2018<-p2018[-c(1),]
+
+```
+
+Create a column with the total percent below the poverty line. 
 
