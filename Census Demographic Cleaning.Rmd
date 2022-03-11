@@ -1,0 +1,75 @@
+---
+title: "Census Demographic Cleaning"
+output: html_notebook
+---
+
+```{r}
+#Load packages: tidyverse, dplyr
+library(tidyverse)
+library(dplyr) ## load the library tidyverse
+library(readtext)
+```
+
+```{r}
+setwd("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads")
+```
+
+
+```{r}
+filelist <- list.files(pattern = "cen*",full.names = T) %>% map_df(~read_csv(., col_types = cols(.default = "c")))
+```
+
+```{r}
+csd2000 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2000csd.csv")
+csd2009 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2009csd.csv")
+csd2010 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2010csd.csv")
+csd2011 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2011csd.csv")
+csd2012 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2012csd.csv")
+csd2013 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2013csd.csv")
+csd2014 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2014csd.csv")
+csd2015 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2015csd.csv")
+csd2016 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2016csd.csv")
+csd2017 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2017csd.csv")
+csd2018 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2018csd.csv")
+
+p2000 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2000p.csv")
+p2009 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2009p.csv")
+p2010 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2010p.csv")
+p2011 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2011p.csv")
+p2012 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2012p.csv")
+p2013 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2013p.csv")
+p2014 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2014p.csv")
+p2015 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2015p.csv")
+p2016 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2016p.csv")
+p2017 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2017p.csv")
+p2018 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2018p.csv")
+```
+
+Subset the data
+```{r}
+csd2000<-csd2000%>%select(c(9,14,23,24,55,71,74,78,79,83,88,93))
+p2000<-p2000%>%select(c(9,14,23,24,55,71,74,78,79,83,88,93))
+csd2009<-csd2009%>%select(c(1,54,63,64,95,111,114,118,119,123,128,133))
+p2009<-p2009%>%select(c(1,54,63,64,95,111,114,118,119,123,128,133))
+csd2010<-csd2010%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
+p2010<-p2010%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
+csd2011<-csd2011%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
+p2011<-p2011%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
+csd2012<-csd2012%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
+p2012<-p2012%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
+csd2013<-csd2013%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
+p2013<-p2013%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
+csd2014<-csd2014%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
+p2014<-p2014%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
+csd2015<-csd2015%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
+p2015<-p2015%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
+csd2016<-csd2016%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
+p2016<-p2016%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
+csd2017<-csd2017%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
+p2017<-p2017%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
+csd2018<-csd2018%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
+p2018<-p2018%>%select(c(1,56,65,66,97,113,116,120,121,125,130,135))
+```
+
+
+
