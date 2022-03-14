@@ -137,20 +137,107 @@ p2018<-p2018[-c(1),]
 
 ```
 
-Create a column with the total percent below the poverty line and delete counts of people below poverty line. 
-```{r}
 
+```{r}
+csd2000<-csd2000 %>% mutate_if(is.character,as.numeric)
+csd2009<-csd2009 %>% mutate_if(is.character,as.numeric)
+csd2010<-csd2010 %>% mutate_if(is.character,as.numeric)
+csd2011<-csd2011 %>% mutate_if(is.character,as.numeric)
+csd2012<-csd2012 %>% mutate_if(is.character,as.numeric)
+csd2013<-csd2013 %>% mutate_if(is.character,as.numeric)
+csd2014<-csd2014 %>% mutate_if(is.character,as.numeric)
+csd2015<-csd2015 %>% mutate_if(is.character,as.numeric)
+csd2016<-csd2016 %>% mutate_if(is.character,as.numeric)
+csd2017<-csd2017 %>% mutate_if(is.character,as.numeric)
+csd2018<-csd2018 %>% mutate_if(is.character,as.numeric)
+
+p2000<-p2000 %>% mutate_if(is.character,as.numeric)
+p2009<-p2009 %>% mutate_if(is.character,as.numeric)
+p2010<-p2010 %>% mutate_if(is.character,as.numeric)
+p2011<-p2011 %>% mutate_if(is.character,as.numeric)
+p2012<-p2012 %>% mutate_if(is.character,as.numeric)
+p2013<-p2013 %>% mutate_if(is.character,as.numeric)
+p2014<-p2014 %>% mutate_if(is.character,as.numeric)
+p2015<-p2015 %>% mutate_if(is.character,as.numeric)
+p2016<-p2016 %>% mutate_if(is.character,as.numeric)
+p2017<-p2017 %>% mutate_if(is.character,as.numeric)
+p2018<-p2018 %>% mutate_if(is.character,as.numeric)
 ```
 
+Create a column with the total percent below the poverty line and delete counts of people below poverty line. 
+```{r}
+csd2000<-csd2000 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+csd2009<-csd2009 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+csd2010<-csd2010 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+csd2011<-csd2011 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+csd2012<-csd2012 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+csd2013<-csd2013 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+csd2014<-csd2014 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+csd2015<-csd2015 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+csd2016<-csd2016 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+csd2017<-csd2017 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+csd2018<-csd2018 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+
+p2000<-p2000 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+p2009<-p2009 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+p2010<-p2010 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+p2011<-p2011 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+p2012<-p2012 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+p2013<-p2013 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+p2014<-p2014 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+p2015<-p2015 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+p2016<-p2016 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+p2017<-p2017 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+p2018<-p2018 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
+```
+
+Add a column with the data year
+```{r}
+csd2000$Year<-2000
+csd2009$Year<-2009
+csd2010$Year<-2010
+csd2011$Year<-2011
+csd2012$Year<-2012
+csd2013$Year<-2013
+csd2014$Year<-2014
+csd2015$Year<-2015
+csd2016$Year<-2016
+csd2017$Year<-2017
+csd2018$Year<-2018
+
+p2000$Year<-2000
+p2009$Year<-2009
+p2010$Year<-2010
+p2011$Year<-2011
+p2012$Year<-2012
+p2013$Year<-2013
+p2014$Year<-2014
+p2015$Year<-2015
+p2016$Year<-2016
+p2017$Year<-2017
+p2018$Year<-2018
+```
+
+Merge the datasets into one by column
 
 Merge into tidy form by year
 ```{r}
-
+merge<- rbind(csd2000,csd2009,csd2010,csd2011,csd2012,csd2013,csd2014,csd2015,csd2016,csd2017,csd2018,p2000,p2009,p2010,p2011,p2012,p2013,p2014,p2015,p2016,p2017,p2018)
 ```
 
-
-Subset by master list
+Read in the master list.
 ```{r}
-
+masterFIPS<-read.csv("/Users/miritfriedman/Desktop/Confirmed_v4.csv")
 ```
+
+Subset by the master list
+```{r}
+merge<-as.data.frame(merge)
+census_output<- filter(merge, FIPS %in% masterFIPS$FIPS)
+```
+Count unique outputs to verify how many FIPS from the master list had census data.
+```{r}
+uni<-unique(census_output$FIPS)
+```
+
 
