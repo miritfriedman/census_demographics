@@ -235,6 +235,13 @@ Subset by the master list
 merge<-as.data.frame(merge)
 census_output<- filter(merge, FIPS %in% masterFIPS$FIPS)
 ```
+
+Create a column with the percent below the poverty line
+```{r}
+census_output$POV_PCT<-(census_output$POV_POP/census_output$TOT_POP)*100
+```
+
+
 Count unique outputs to verify how many FIPS from the master list had census data.
 ```{r}
 uni<-unique(census_output$FIPS)
