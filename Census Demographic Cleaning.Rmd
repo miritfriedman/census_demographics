@@ -1,6 +1,9 @@
 ---
 title: "Census Demographic Cleaning"
 output: html_notebook
+Project: Squeeze Project
+Created By: Mirit Friedman
+Version Date: 5/18/2022
 ---
 
 ```{r}
@@ -41,7 +44,7 @@ p2017 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics
 p2018 <- read.csv("/Users/miritfriedman/Desktop/Squeeze Data/census_demographics/CensusDownloads/cen_2018p.csv")
 ```
 
-Subset the data
+Subset the data columns of interest.
 ```{r}
 csd2000<-csd2000%>%select(c(9,14,23,24,55,71,74,78,79,81,86,91))
 p2000<-p2000%>%select(c(9,14,23,24,55,71,74,78,79,81,86,91))
@@ -137,7 +140,7 @@ p2018<-p2018[-c(1),]
 
 ```
 
-
+Change the variables from character to numeric.
 ```{r}
 csd2000<-csd2000 %>% mutate_if(is.character,as.numeric)
 csd2009<-csd2009 %>% mutate_if(is.character,as.numeric)
@@ -191,7 +194,7 @@ p2017<-p2017 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
 p2018<-p2018 %>% rowwise() %>% mutate(POV_POP = sum(c_across(10:12)))
 ```
 
-Add a column with the data year
+Add a column with the data year.
 ```{r}
 csd2000$Year<-2000
 csd2009$Year<-2009
@@ -218,19 +221,18 @@ p2017$Year<-2017
 p2018$Year<-2018
 ```
 
-Merge the datasets into one by column
-
-Merge into tidy form by year
+Merge the individual datasets into one file.
 ```{r}
 merge<- rbind(csd2000,csd2009,csd2010,csd2011,csd2012,csd2013,csd2014,csd2015,csd2016,csd2017,csd2018,p2000,p2009,p2010,p2011,p2012,p2013,p2014,p2015,p2016,p2017,p2018)
 ```
 
 Read in the master list.
 ```{r}
-masterFIPS<-read.csv("/Users/miritfriedman/Desktop/Confirmed_v4.csv")
+masterFIPS<-read.csv("/Users/miritfriedman/Desktop/Squeeze Data/FinalList_FIPSKey.csv")
+masterFIPS<-rename(masterFIPS, "FIPS"="FIPS_2020")
 ```
 
-Subset by the master list
+Subset the census data by the master list.
 ```{r}
 merge<-as.data.frame(merge)
 census_output<- filter(merge, FIPS %in% masterFIPS$FIPS)
@@ -241,10 +243,37 @@ Create a column with the percent below the poverty line
 census_output$POV_PCT<-(census_output$POV_POP/census_output$TOT_POP)*100
 ```
 
-
 Count unique outputs to verify how many FIPS from the master list had census data.
 ```{r}
 uni<-unique(census_output$FIPS)
+uniFIP<-unique(masterFIPS$FIPS)
+uniPWS<-unique(masterFIPS$PWSID)
+dup<-masterFIPS[duplicated(masterFIPS$FIPS),]
+dup2<-masterFIPS[duplicated(masterFIPS$PWSID),]
 ```
 
+Save the output file
+```{r}
+date<-Sys.Date()
+csvfilename<-paste("CensusDem_Output_",date,".csv",sep="")
+write.csv(census_output,file=csvfilename)
+```
+
+Descriptive Statistics
+```{r}
+summary(census_output$PCT_White)
+summary(census_output$Median_Year_Built)
+summary(census_output$POV_PCT)
+summary(census_output$TOT_POP)
+summary(census_output$Median_Income)
+```
+
+
+
+
+Create list of FIPS to match county voting data
+
+```{r}
+cnty<-subset(csd2000, select= c(2,9,10,12))
+```
 
